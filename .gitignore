@@ -20,6 +20,8 @@ bin/
 /nbbuild/
 /dist/
 /nbdist/
+*.idea
+*univer.iml
 /.nb-gradle/
 
 ### VS Code ###
