@@ -1,15 +1,34 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        QueryExecutor executor = new QueryExecutor();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        System.out.println("Получение учителей по дню и классу:");
+        List<Teacher> teachers = executor.getTeachersByDayAndClassroom("Monday", "608");
+        for (Teacher teacher : teachers) {
+            System.out.println(teacher.getFullName());
         }
+
+        System.out.println("Получение учителей, не работающих в понедельник:");
+        teachers = executor.getTeachersNotWorkingOnDay("Monday");
+        for (Teacher teacher : teachers) {
+            System.out.println(teacher.getFullName());
+        }
+
+        System.out.println("Получение дней с количеством классов:");
+        List<String> days = executor.getDaysWithClassroomCount(3);
+        for (String day : days) {
+            System.out.println(day);
+        }
+
+        System.out.println("Получение дней с количеством предметов:");
+        days = executor.getDaysWithSubjectCount(4);
+        for (String day : days) {
+            System.out.println(day);
+        }
+
+        System.out.println("Перемещение первого занятия в конец списка:");
+        executor.moveFirstClassToEnd("Monday", "Saturday");
     }
 }
